@@ -8,8 +8,8 @@ class User(models.Model):
     username = models.CharField(max_length=16, verbose_name='用户名')
     password = models.CharField(max_length=32, verbose_name='密码')
     email = models.EmailField(null=True, verbose_name='邮箱')
-    image = models.ImageField(default='/statics/web/avatars/default-avatar.jpg',
-                              upload_to='statics/web/avatars',
+    image = models.ImageField(default='web/avatars/default-avatar.jpg',
+                              upload_to='web/avatars',
                               verbose_name='头像')
     fans = models.ManyToManyField('self', related_name='fan')
 
