@@ -8,6 +8,7 @@ from django.shortcuts import HttpResponse
 from django.templatetags.static import static
 
 from justform.register import RegisterForm
+from utils.misc import create_random_captcha
 
 # Create your views here.
 
@@ -43,3 +44,10 @@ def upload_image(request):
     # 去掉前面的 'web' 否则会导致静态文件地址出错
     result['data'] = filepath[3:]
     return HttpResponse(json.dumps(result))
+
+
+def captcha(request):
+    """captcha"""
+    text, captcha = create_random_captcha()
+    request.session['captcha'] = text
+    return HttpResponse(captcha.getvalue())

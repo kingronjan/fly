@@ -47,3 +47,11 @@ class RegisterForm(forms.Form):
             }
         )
     )
+    captcha = fields.CharField(
+        label='Captcha',
+        widget=widgets.Input(
+            attrs={
+                'class': 'form-control', 'placeholder': 'Enter captcha'
+            }
+        )
+    )

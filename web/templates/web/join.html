@@ -27,6 +27,12 @@
                 {{ form.password }}
                 {{ form.password.errors }}
             </div>
+            <div class="form-group">
+                <img src="/web/captcha/" onclick="changeCaptcha(this);" />
+                <label>{{ form.captcha.label }}</label>
+                {{ form.captcha }}
+                {{ form.captcha.errors }}
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
@@ -58,6 +64,11 @@
         tag.className = 'img-thumbnail';
         // 注意需先清空再添加，否则会导致div标签中出现多个img标签，使得上传与预览不一致
         $('#preview').empty().append(tag);
+    }
+
+    function changeCaptcha(ths) {
+        // 加 ? 会导致imag标签因改变了src而重新加载
+        ths.src = ths.src + '?'
     }
 </script>
 {% endblock %}
