@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Just fly</title>
+    <link rel="stylesheet" href="{% static 'web/bootstrap/css/bootstrap.min.css' %}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-info">
+  <a class="navbar-brand mb-0 h1" href="/web">Just fly</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <form class="form-inline input-group-sm">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search anything here" aria-label="Search">
+    </form>
+      <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/web/join/">注册</a>
+        </li>
+        <span class="navbar-text">
+            /
+        </span>
+        <li class="nav-item">
+            <a class="nav-link" href="#">登录</a>
+        </li>
+    </ul>
+  </div>
+</nav>
+
+<div>
+    {% block mainbody %}
+    {% endblock %}
+</div>
+
+{% block staticimports %}
+    <script src="{% static 'web/jquery/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'web/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'web/bootstrap/js/bootstrap.min.js' %}"></script>
+{% endblock %}
+</body>
+</html>
