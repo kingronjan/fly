@@ -1,0 +1,15 @@
+{% extends "web/extends/index.html" %}
+
+{% block heraderarea %}
+    <title>404</title>
+    {{ block.super }}
+{% endblock %}
+
+{% block mainbody %}
+    <div class="jumbotron jumbotron-fluid bg-info">
+      <div class="container">
+        <h1 class="display-4">Page not found</h1>
+        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+      </div>
+    </div>
+{% endblock %}
