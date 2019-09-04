@@ -4,7 +4,7 @@
 <head>
     {% block heraderarea %}
     <meta charset="UTF-8">
-    <title>Just fly</title>
+    <title>{% block title %}Just fly{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'web/bootstrap/css/bootstrap.min.css' %}">
     <script src="{% static 'web/jquery/jquery-3.4.1.min.js' %}"></script>
     {% endblock %}
