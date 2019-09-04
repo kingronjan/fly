@@ -5,7 +5,7 @@ from django.db import models
 
 class User(models.Model):
     """Users"""
-    username = models.CharField(max_length=16, verbose_name='用户名')
+    username = models.CharField(max_length=16, verbose_name='用户名', unique=True)
     password = models.CharField(max_length=32, verbose_name='密码')
     email = models.EmailField(null=True, verbose_name='邮箱')
     image = models.ImageField(default='web/avatars/default-avatar.jpg',
