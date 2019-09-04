@@ -24,6 +24,20 @@ def create_random_captcha():
     return text, image
 
 
+def is_right_captcha(request, field='captcha'):
+    """
+    Check the input captcha
+    """
+    if field not in request.POST:
+        return False
+
+    input_captcha = request.POST.get(field)
+    captcha = request.session.get(field)
+    if captcha.lower() != input_captcha.lower():
+        return False
+    return True
+
+
 if __name__ == '__main__':
     text, c = create_random_captcha()
     print(c)
