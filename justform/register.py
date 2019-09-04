@@ -1,12 +1,14 @@
 from django import forms
 from django.forms import fields, widgets
 
+from repository.models import User
+
 
 class RegisterForm(forms.Form):
 
     username = fields.CharField(
         max_length=16,
-        min_length=6,
+        min_length=3,
         required=True,
         label='Username',
         widget=widgets.TextInput(
@@ -38,9 +40,9 @@ class RegisterForm(forms.Form):
         )
     )
     image = fields.ImageField(
+        required=False,
         allow_empty_file=True,
         label='Avatar',
-        initial='web/avatars/default-avatar.jpg',
         widget=widgets.FileInput(
             attrs={
                 'class': 'custom-file-input', 'id': 'customFile'
@@ -48,6 +50,7 @@ class RegisterForm(forms.Form):
         )
     )
     captcha = fields.CharField(
+        required=True,
         label='Captcha',
         widget=widgets.Input(
             attrs={
@@ -55,3 +58,8 @@ class RegisterForm(forms.Form):
             }
         )
     )
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if User.objects.filter(username=username):
+            raise forms.ValidationError('username already existed')
