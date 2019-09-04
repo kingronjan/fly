@@ -1,0 +1,103 @@
+{% extends "web/extends/index.html" %}
+
+{% block heraderarea %}
+    {{ block.super }}
+    <style>
+        .cus-label {
+            font-size: large;
+            font-family: bold;
+        }
+        .captcha {
+            width: 120px;
+            height: 46px;
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}
+
+
+{% block mainbody %}
+    <div class="container">
+        <!-- novalidate关闭html5自带的验证 -->
+        <form action="{% url "signup" %}" method="post" novalidate>
+            {% csrf_token %}
+            <p></p>
+            <div class="form-group">
+                <label class="cus-label">{{ form.username.label }}</label>
+                <small class="text-muted">Username can just contains integer or letter or _</small>
+                {{ form.username }}
+                <small class="form-text text-danger">{{ form.username.errors.0 }}</small>
+            </div>
+            <label class="cus-label">{{ form.image.label }}</label>
+            <div class="custom-file">
+                {{ form.image }}
+                <label class="custom-file-label" for="customFile">Choose an avatar</label>
+            </div>
+            <p></p>
+            <div class="form-group">
+                <label class="cus-label">{{ form.email.label }}</label>
+                <small class="text-muted">We'll never share your email with anyone else.</small>
+                {{ form.email }}
+                <small class="form-text text-danger">{{ form.email.errors.0 }}</small>
+            </div>
+            <div class="form-group">
+                <label class="cus-label">{{ form.password.label }}</label>
+                {{ form.password }}
+                <small class="form-text text-danger">{{ form.password.errors.0 }}</small>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label class="cus-label">{{ form.captcha.label }}</label>
+                    <small class="text-muted">Click the captcha to change another.</small>
+                    {{ form.captcha }}
+                    <small class="form-text text-danger">{{ form.captcha.errors.0 }}</small>
+                </div>
+            <div class="col">
+                <br>
+                <img src="{% url "captcha" %}" onclick="changeCaptcha(this);" alt="" class="captcha"/>
+            </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+
+{#图片预览 暂不考虑#}
+{#    <div class="container">#}
+{#        <h3>文件上传</h3>#}
+{#        <iframe style="display: none;" id="iframe" name="ifra"></iframe>#}
+{#        <form id="fm" action="/web/upload_image/" method="POST" enctype="multipart/form-data" target="ifra">#}
+{#            {% csrf_token %}#}
+{#            <input type="file" name="img" onchange="uploadFiles();" />#}
+{#        </form>#}
+{##}
+{#        <h3>预览</h3>#}
+{#        <div id="preview"></div>#}
+{#    </div>#}
+<script>
+{#    function uploadFiles() {#}
+{#        // 绑定onload属性#}
+{#        document.getElementById('iframe').onload = reloadIframe;#}
+{#        // 提交#}
+{#        document.getElementById('fm').submit();#}
+{#    }#}
+{##}
+{#    function reloadIframe() {#}
+{#        var content = this.contentWindow.document.body.innerHTML;#}
+{#        var obj = JSON.parse(content);#}
+{#        // 创建img标签#}
+{#        var tag = document.createElement('img');#}
+{#        tag.src = obj.data;#}
+{#        tag.className = 'img-thumbnail';#}
+{#        // 注意需先清空再添加，否则会导致div标签中出现多个img标签，使得上传与预览不一致#}
+{#        $('#preview').empty().append(tag);#}
+{#    }#}
+{##}
+    function changeCaptcha(ths) {
+        // 加 ? 会导致imag标签因改变了src而重新加载
+        ths.src = ths.src + '?'
+    }
+</script>
+
+{% endblock %}

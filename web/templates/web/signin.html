@@ -1,0 +1,81 @@
+{% extends "web/extends/index.html" %}
+
+{% block heraderarea %}
+    {{ block.super }}
+    <style>
+        .cus-label {
+            font-size: large;
+            font-family: bold;
+        }
+        .captcha {
+            width: 120px;
+            height: 46px;
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}
+
+
+{% block mainbody %}
+    <div class="container">
+        <form action="{% url "signin" %}" method="post">
+            {% csrf_token %}
+            <p></p>
+            <div class="form-group">
+                <label class="cus-label">Username</label>
+                {% if request.POST %}
+                    <input type="text" class="form-control" placeholder="Enter username" name="username" value="{{ request.POST.username }}">
+                {% else %}
+                    <input type="text" class="form-control" placeholder="Enter username" name="username" onchange="checkUsername(this);">
+                {% endif %}
+                <small class="form-text text-danger user-error">{{ errors.username }}</small>
+            </div>
+            <div class="form-group">
+                <label class="cus-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+                <small class="form-text text-danger">{{ errors.password }}</small>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label class="cus-label">Captcha</label>
+                    <small class="text-muted">Click the captcha to change another.</small>
+                    <input type="text" class="form-control" placeholder="Enter captcha" name="captcha">
+                    <small class="form-text text-danger">{{ errors.captcha }}</small>
+                </div>
+            <div class="col">
+                <br>
+                <img src="{% url "captcha" %}" onclick="changeCaptcha(this);" alt="" class="captcha"/>
+            </div>
+            </div>
+            <br>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="nosiginin15">
+                <label class="form-check-label" for="exampleCheck1">15天内免登录</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+<script>
+        $.ajaxSetup({
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+        });
+</script>
+<script>
+    function changeCaptcha(ths) {
+        ths.src = ths.src + '?'
+    }
+
+    function checkUsername(ths) {
+        $.ajax({
+            url: '{% url "checkusername" %}',
+            type: 'POST',
+            dataType: 'JSON',
+            data: {'username': ths.value},
+            success: function (arg) {
+                $('.user-error').text(arg.error);
+            }
+        })
+    }
+</script>
+
+{% endblock %}
