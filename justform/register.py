@@ -26,7 +26,7 @@ class RegisterForm(forms.Form):
         label='Password',
         widget=widgets.PasswordInput(
             attrs={
-                'class': 'form-control', 'placeholder': 'Enter email'
+                'class': 'form-control', 'placeholder': 'Enter password'
             }
         )
     )
@@ -63,3 +63,4 @@ class RegisterForm(forms.Form):
         username = self.cleaned_data['username']
         if User.objects.filter(username=username):
             raise forms.ValidationError('username already existed')
+        return username
