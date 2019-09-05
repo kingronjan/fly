@@ -13,6 +13,7 @@ class User(models.Model):
                               verbose_name='头像')
     fans = models.ManyToManyField('self', related_name='fan')
     registration_time = models.DateTimeField(auto_now=True, verbose_name='注册时间')
+    nickname = models.CharField(max_length=16, verbose_name='昵称')
 
     def __str__(self):
         return self.username
