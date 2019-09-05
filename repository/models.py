@@ -12,6 +12,7 @@ class User(models.Model):
                               upload_to='web/avatars',
                               verbose_name='头像')
     fans = models.ManyToManyField('self', related_name='fan')
+    registration_time = models.DateTimeField(auto_now=True, verbose_name='注册时间')
 
     def __str__(self):
         return self.username
@@ -79,9 +80,11 @@ class Article(models.Model):
     title = models.CharField(max_length=32, verbose_name='标题')
     summary = models.CharField(max_length=256, null=True, verbose_name='摘要')
     content = models.TextField(verbose_name='内容')
-    create_time = models.DateTimeField(verbose_name='创建时间')
+    create_time = models.DateTimeField(auto_now=True, verbose_name='创建时间')
     classification = models.ForeignKey(Classification, null=True, on_delete=models.SET_NULL, verbose_name='分类')
     tag = models.ManyToManyField(Tag, related_name='t', verbose_name='标签')
+    up_count = models.IntegerField(default=0, verbose_name='点赞数量')
+    down_count = models.IntegerField(default=0, verbose_name='踩数量')
 
     def __str__(self):
         return self.title
