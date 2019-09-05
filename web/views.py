@@ -18,10 +18,17 @@ from repository import models
 # Create your views here.
 
 
-def index(request, username=None):
-    if username and models.User.objects.filter(username=username).first() is None:
-        return render404(request)
+def index(request):
+    """blog site's index page"""
     return render(request, 'web/index.html')
+
+
+def homepage(request, username):
+    user = models.User.objects.filter(username=username).first()
+    if user is None:
+        return render404(request)
+
+    return render(request, 'web/homepage.html', {'user_info': user})
 
 
 def signup(request):
@@ -69,7 +76,7 @@ def signin(request):
             request.session.set_expiry(30 * 24 * 60 * 60)
 
         request.session['user'] = username
-        return render(request, 'web/index.html')
+        return redirect(f'../{username}', username=username)
 
     return render_err(None, None)
 
