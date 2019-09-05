@@ -13,7 +13,7 @@ class RegisterForm(forms.Form):
         label='Username',
         widget=widgets.TextInput(
             attrs={
-                'class': 'form-control', 'placeholder': 'Enter username'
+                'class': 'form-control', 'placeholder': 'Enter username', 'onchange': 'checkUsername(this);'
             }
         ),
         error_messages={
