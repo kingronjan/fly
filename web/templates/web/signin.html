@@ -49,33 +49,16 @@
             </div>
             <br>
             <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="nosiginin15">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="nosignin1month">
                 <label class="form-check-label" for="exampleCheck1">一个月内免登录</label>
             </div>
             <button type="submit" class="btn btn-primary">提交</button>
         </form>
     </div>
 <script>
-        $.ajaxSetup({
-            data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
-        });
-</script>
-<script>
-    function changeCaptcha(ths) {
-        ths.src = ths.src + '?'
-    }
-
-    function checkUsername(ths) {
-        $.ajax({
-            url: '{% url "checkusername" %}',
-            type: 'POST',
-            dataType: 'JSON',
-            data: {'username': ths.value},
-            success: function (arg) {
-                $('.user-error').text(arg.error);
-            }
-        })
-    }
+    {% load staticfiles %}
+    {% include "web/include/ajaxcsrf.js" %}
+    {% include "web/include/sign.js" %}
 </script>
 
 {% endblock %}

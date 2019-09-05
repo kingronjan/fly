@@ -26,7 +26,7 @@
                 <label class="cus-label">{{ form.username.label }}</label>
                 <small class="text-muted">Username can just contains integer or letter or _</small>
                 {{ form.username }}
-                <small class="form-text text-danger">{{ form.username.errors.0 }}</small>
+                <small class="form-text text-danger user-error">{{ form.username.errors.0 }}</small>
             </div>
             <label class="cus-label">{{ form.image.label }}</label>
             <div class="custom-file">
@@ -94,10 +94,9 @@
 {#        $('#preview').empty().append(tag);#}
 {#    }#}
 {##}
-    function changeCaptcha(ths) {
-        // 加 ? 会导致imag标签因改变了src而重新加载
-        ths.src = ths.src + '?'
-    }
+{% load staticfiles %}
+{% include "web/include/ajaxcsrf.js" %}
+{% include "web/include/sign.js" %}
 </script>
 
 {% endblock %}
