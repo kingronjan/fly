@@ -65,6 +65,9 @@ def signin(request):
         if saved_pwd != password:
             return render_err('password', '密码错误。')
 
+        if request.POST.get('nosignin1month'):
+            request.session.set_expiry(30 * 24 * 60 * 60)
+
         request.session['user'] = username
         return render(request, 'web/index.html')
 
@@ -72,10 +75,12 @@ def signin(request):
 
 
 def checkusername(request):
-    message = {'error': None}
+    message = {}
     username = request.POST.get('username')
     if not models.User.objects.filter(username=username):
-        message['error'] = '用户名不存在。'
+        message['signin_error'] = '用户名不存在。'
+    else:
+        message['signup_error'] = '用户名已存在。'
     return HttpResponse(json.dumps(message))
 
 
