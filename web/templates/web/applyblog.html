@@ -1,0 +1,28 @@
+{% extends "web/extends/index.html" %}
+
+{% block title %}
+Apply blog -Just fly
+{% endblock %}
+
+{% block mainbody %}
+<div class="container">
+        <!-- novalidate关闭html5自带的验证 -->
+        <form action="{% url "apply-blog" %}" method="post" novalidate>
+            {% csrf_token %}
+            <p></p>
+            <div class="form-group">
+                <label class="cus-label">{{ form.title.label }}</label>
+                <small class="text-muted">{{ form.title.help_text }}</small>
+                {{ form.title }}
+                <small class="form-text text-danger user-error">{{ form.title.errors.0 }}</small>
+            </div>
+            <div class="form-group">
+                <label class="cus-label">{{ form.summary.label }}</label>
+                <small class="text-muted">{{ form.summary.help_text }}</small>
+                {{ form.summary }}
+                <small class="form-text text-danger">{{ form.summary.errors.0 }}</small>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}
