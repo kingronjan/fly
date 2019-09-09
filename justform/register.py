@@ -18,7 +18,8 @@ class RegisterForm(forms.Form):
         ),
         error_messages={
             'required': '用户名不能为空',
-        }
+        },
+        help_text='Username can just contains integer or letter or _'
     )
     password = fields.CharField(
         required=True,
@@ -37,7 +38,8 @@ class RegisterForm(forms.Form):
             attrs={
                 'class': 'form-control', 'placeholder': 'Enter email'
             }
-        )
+        ),
+        help_text="We'll never share your email with anyone else."
     )
     image = fields.ImageField(
         required=False,
@@ -56,7 +58,8 @@ class RegisterForm(forms.Form):
             attrs={
                 'class': 'form-control', 'placeholder': 'Enter captcha'
             }
-        )
+        ),
+        help_text='Click the captcha to change another.'
     )
 
     def clean_username(self):
