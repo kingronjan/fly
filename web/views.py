@@ -9,6 +9,7 @@ from django.shortcuts import HttpResponse
 from django.templatetags.static import static
 
 from justform.register import RegisterForm
+from justform.blog import BlogForm
 from utils.misc import create_random_captcha, is_right_captcha
 from utils.error import render404
 
@@ -95,6 +96,13 @@ def signout(request):
     if 'user' in request.session:
         request.session.pop('user')
     return redirect('/web/')
+
+
+def apply_blog(request):
+    if request.method == 'POST':
+        return
+    form = BlogForm()
+    return render(request, 'web/applyblog.html', {'form': form})
 
 
 def upload_image(request):
