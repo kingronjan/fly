@@ -21,10 +21,10 @@ class User(models.Model):
 
 class Blog(models.Model):
     suffix = models.CharField(max_length=16)
-    theme = models.CharField(max_length=16, verbose_name='主题')
+    theme = models.CharField(max_length=16, default='default', verbose_name='主题')
     title = models.CharField(max_length=32, verbose_name='标题')
     summary = models.CharField(max_length=128, null=True, verbose_name='简介')
-    uid = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='用户ID')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='用户')
 
     def __str__(self):
         return self.title
