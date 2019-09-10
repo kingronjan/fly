@@ -3,6 +3,7 @@ import uuid
 import json
 
 from django.http import Http404
+from django.urls import reverse
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.shortcuts import HttpResponse
@@ -57,6 +58,9 @@ def signin(request):
 
     def render_err(field, value):
         errors = {field: value}
+        # FIXME
+        #  NoReverseMatch: Reverse for 'signin' not found.
+        # form blog.apply
         return render(request, 'web/signin.html', {'errors': errors})
 
     if request.method == 'POST':
@@ -77,7 +81,7 @@ def signin(request):
             request.session.set_expiry(30 * 24 * 60 * 60)
 
         request.session['user'] = username
-        return redirect(f'../{username}', username=username)
+        return redirect(reverse('web:homepage'), username=username)
 
     return render_err(None, None)
 
@@ -96,13 +100,6 @@ def signout(request):
     if 'user' in request.session:
         request.session.pop('user')
     return redirect('/web/')
-
-
-def apply_blog(request):
-    if request.method == 'POST':
-        return
-    form = BlogForm()
-    return render(request, 'web/applyblog.html', {'form': form})
 
 
 def upload_image(request):
