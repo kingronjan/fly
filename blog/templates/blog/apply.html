@@ -7,7 +7,7 @@ Apply blog -Just fly
 {% block mainbody %}
 <div class="container">
         <!-- novalidate关闭html5自带的验证 -->
-        <form action="{% url "apply-blog" %}" method="post" novalidate>
+        <form action="{% url "blog:apply" %}" method="post" novalidate>
             {% csrf_token %}
             <p></p>
             <div class="form-group">
