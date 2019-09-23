@@ -30,3 +30,7 @@ def apply(request):
     blog = models.Blog.objects.create(suffix=suffix, user=user, title=data['title'], summary=data['summary'])
 
     return index(request, blog)
+
+
+def test(request):
+    return render(request, 'blog/layout.html')
