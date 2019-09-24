@@ -1,0 +1,50 @@
+.right {
+        float: right;
+    }
+.left {
+    float: left;
+}
+body {
+    margin: 0;
+}
+.pg-header {
+    height: 48px;
+    background: #549654;
+    min-width: 1024px;
+    line-height: 48px;
+}
+.pg-header .log {
+    font-size: 24px;
+    text-align: center;
+    width: 200px;
+    color: white;
+}
+.pg-header .hl-menu .item, .pg-header .hr-menu .item {
+    padding: 0 10px;
+    height: 48px;
+    display: inline-block;
+    color: #1d2124;
+}
+.pg-header .hl-menu .item:hover, .pg-header .hr-menu .item:hover{
+    background: darkgreen;
+}
+.pg-header .hl-menu .item-set , .pg-header .hr-menu .item-set {
+    display: inline-block;
+    position: relative;
+}
+.pg-header .hl-menu .item-set .sets, .pg-header .hr-menu .item-set .sets {
+    position: absolute;
+    width: 150px;
+    display: none;
+}
+.pg-header .hl-menu .item-set .sets a, .avatar .hr-menu .item-set .sets a{
+    display: block;
+    width: auto;
+    color: #1d2124;
+    background: #549654;
+    padding: 0 10px;
+    height: 48px;
+}
+.avatar {
+    border-radius: 50%;
+}

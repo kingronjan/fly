@@ -21,6 +21,3 @@ class BlogForm(forms.Form):
         label='Blog summary',
         help_text='Summary of your blog, max 128 character'
     )
-    user = forms.IntegerField(
-        initial='{{ request.session["user"] }}'
-    )

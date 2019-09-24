@@ -70,7 +70,6 @@ class Classification(models.Model):
 
 class Tag(models.Model):
     title = models.CharField(max_length=16, verbose_name='标题')
-    caption = models.CharField(max_length=128, null=True, verbose_name='描述')
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -82,10 +81,11 @@ class Article(models.Model):
     summary = models.CharField(max_length=256, null=True, verbose_name='摘要')
     content = models.TextField(verbose_name='内容')
     create_time = models.DateTimeField(auto_now=True, verbose_name='创建时间')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='作者')
     classification = models.ForeignKey(Classification, null=True, on_delete=models.SET_NULL, verbose_name='分类')
     tag = models.ManyToManyField(Tag, related_name='t', verbose_name='标签')
-    up_count = models.IntegerField(default=0, verbose_name='点赞数量')
-    down_count = models.IntegerField(default=0, verbose_name='踩数量')
+    up_count = models.PositiveIntegerField(default=0, verbose_name='点赞数量')
+    down_count = models.PositiveIntegerField(default=0, verbose_name='踩数量')
 
     def __str__(self):
         return self.title

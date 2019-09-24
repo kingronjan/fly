@@ -19,7 +19,7 @@
 {% block mainbody %}
     <div class="container">
         <!-- novalidate关闭html5自带的验证 -->
-        <form action="{% url "signup" %}" method="post" novalidate>
+        <form action="{% url "web:signup" %}" method="post" novalidate>
             {% csrf_token %}
             <p></p>
             <div class="form-group">
@@ -54,7 +54,7 @@
                 </div>
             <div class="col">
                 <br>
-                <img src="{% url "captcha" %}" onclick="changeCaptcha(this);" alt="" class="captcha"/>
+                <img src="{% url "web:captcha" %}" onclick="changeCaptcha(this);" alt="" class="captcha"/>
             </div>
             </div>
             <br>

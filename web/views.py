@@ -58,9 +58,6 @@ def signin(request):
 
     def render_err(field, value):
         errors = {field: value}
-        # FIXME
-        #  NoReverseMatch: Reverse for 'signin' not found.
-        # form blog.apply
         return render(request, 'web/signin.html', {'errors': errors})
 
     if request.method == 'POST':
@@ -81,7 +78,7 @@ def signin(request):
             request.session.set_expiry(30 * 24 * 60 * 60)
 
         request.session['user'] = username
-        return redirect(reverse('web:homepage'), username=username)
+        return redirect(reverse('web:homepage', kwargs={'username': username}))
 
     return render_err(None, None)
 

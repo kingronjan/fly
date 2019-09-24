@@ -8,7 +8,7 @@ function checkUsername(ths) {
     // check the username is existed or not
     $('.user-error').html('');
     $.ajax({
-        url: '{% url "checkusername" %}',
+        url: '{% url "web:checkusername" %}',
         type: 'POST',
         dataType: 'JSON',
         data: {'username': ths.value},

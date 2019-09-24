@@ -1,10 +1,51 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% block title %}{% endblock %}</title>
+    {% block css %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/layout.css' %}">
 </head>
 <body>
-
+    <div class="pg-header">
+        <div class="log left">Just fly</div>
+        <div class="hl-menu left">
+            <a class="item" href="{% url 'blog:article' request.session.user %}">Article manager</a>
+            <a class="item" href="#">Menu 2</a>
+            <a class="item" href="#">Menu 3</a>
+            <div class="item-set">
+                <a class="item" href="#">Menu 4</a>
+                <div class="sets">
+                    <a href="#">Menu 4-1</a>
+                    <a href="#">Menu 4-2</a>
+                    <a href="#">Menu 4-3</a>
+                </div>
+            </div>
+        </div>
+        <div class="hr-menu right">
+            <a class="item" href="#">Message X</a>
+            <a class="item" href="#">Message Y</a>
+            <a class="item" href="#">Message Z</a>
+            <div class="item-set">
+                <a class="item" href="#">
+                    <img class="avatar" src="{% static 'web/avatars/default-avatar.jpg' %}" alt="" height="40" width="40">
+                </a>
+                <div class="sets">
+                    <a href="#">Menu 4-1</a>
+                    <a href="#">Menu 4-2</a>
+                    <a href="#">Menu 4-3</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pg-body">
+        <div class="menus"></div>
+        <div class="contents">
+            {% block contents %}{% endblock %}
+        </div>
+    </div>
+    <div class="pg-footer"></div>
+    {% block js %}{% endblock %}
 </body>
 </html>

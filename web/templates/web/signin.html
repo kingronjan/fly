@@ -18,7 +18,7 @@
 
 {% block mainbody %}
     <div class="container">
-        <form action="{% url "signin" %}" method="post">
+        <form action="{% url "web:signin" %}" method="post">
             {% csrf_token %}
             <p></p>
             <div class="form-group">
@@ -44,7 +44,7 @@
                 </div>
             <div class="col">
                 <br>
-                <img src="{% url "captcha" %}" onclick="changeCaptcha(this);" alt="" class="captcha"/>
+                <img src="{% url "web:captcha" %}" onclick="changeCaptcha(this);" alt="" class="captcha"/>
             </div>
             </div>
             <br>

@@ -11,5 +11,5 @@ urlpatterns = [
     path('signout/', views.signout, name='signout'),
     path('upload_image/', views.upload_image, name='upload_image'),
     path('captcha/', views.handle_captcha, name='captcha'),
-    path('<str:username>', views.homepage, name='homepage'),
+    path('<str:username>/', views.homepage, name='homepage'),
 ]
