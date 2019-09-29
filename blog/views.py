@@ -9,14 +9,26 @@ def index(request):
     username = request.session.get('user')
     if not username:
         return redirect(reverse('web:signup'))
-    return render(request, 'blog/homepage.html')
+    user = models.User.objects.filter(username=username).first()
+
+    blog = models.Blog.objects.filter(user=user).first()
+    if not blog:
+        return redirect(reverse('blog:apply'))
+
+    articles = models.Article.objects.filter(blog=blog)
+    return render(request, 'blog/homepage.html', {'user': user, 'blog': blog, 'articles': articles})
 
 
 def apply(request):
     from justform.blog import BlogForm
 
-    if not request.session.get('user'):
+    user = request.session.get('user')
+    if not user:
         return redirect(reverse('web:signin'))
+
+    blog = models.Blog.objects.filter(user__username=user).first()
+    if blog:
+        return index(request)
 
     if request.method != 'POST':
         form = BlogForm()

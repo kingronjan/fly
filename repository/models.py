@@ -82,6 +82,7 @@ class Article(models.Model):
     content = models.TextField(verbose_name='内容')
     create_time = models.DateTimeField(auto_now=True, verbose_name='创建时间')
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='作者')
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, verbose_name='博客')
     classification = models.ForeignKey(Classification, null=True, on_delete=models.SET_NULL, verbose_name='分类')
     tag = models.ManyToManyField(Tag, related_name='t', verbose_name='标签')
     up_count = models.PositiveIntegerField(default=0, verbose_name='点赞数量')

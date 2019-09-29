@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'web/bootstrap/css/bootstrap.min.css' %}">
     <script src="{% static 'web/jquery/jquery-3.4.1.min.js' %}"></script>
     {% endblock %}
+    {% block style %}{% endblock %}
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-info">
@@ -70,10 +71,8 @@
   </div>
 </nav>
 
-<div>
-    {% block mainbody %}
-    {% endblock %}
-</div>
+{% block mainbody %}
+{% endblock %}
 
 {% block staticimports %}
     <script src="{% static 'web/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
