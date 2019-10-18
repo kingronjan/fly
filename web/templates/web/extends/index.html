@@ -70,7 +70,7 @@
     </ul>
   </div>
 </nav>
-
+{% block info %}{% endblock %}
 {% block mainbody %}
 {% endblock %}
 
@@ -78,5 +78,9 @@
     <script src="{% static 'web/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'web/bootstrap/js/bootstrap.min.js' %}"></script>
 {% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
 </body>
 </html>

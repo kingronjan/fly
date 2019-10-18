@@ -1,34 +1,28 @@
-from django.urls import reverse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from repository import models
+from utils.request import require_signin
+from utils.error import render404
 
 # Create your views here.
 
-
-def index(request):
-    username = request.session.get('user')
-    if not username:
-        return redirect(reverse('web:signup'))
+def index(request, username):
     user = models.User.objects.filter(username=username).first()
-
     blog = models.Blog.objects.filter(user=user).first()
     if not blog:
-        return redirect(reverse('blog:apply'))
+        # return redirect(reverse('blog:apply'))
+        return render404(request)
 
     articles = models.Article.objects.filter(blog=blog)
     return render(request, 'blog/homepage.html', {'user': user, 'blog': blog, 'articles': articles})
 
 
+@require_signin
 def apply(request):
     from justform.blog import BlogForm
-
-    user = request.session.get('user')
-    if not user:
-        return redirect(reverse('web:signin'))
-
+    user = request.session['user']
     blog = models.Blog.objects.filter(user__username=user).first()
     if blog:
-        return index(request)
+        return index(request, user)
 
     if request.method != 'POST':
         form = BlogForm()
@@ -43,15 +37,22 @@ def apply(request):
     data = form.cleaned_data
     models.Blog.objects.create(suffix=suffix, user=user, title=data['title'], summary=data['summary'])
 
-    return index(request)
+    return index(request, user)
 
 
 def test(request):
     return render(request, 'blog/layout.html')
 
 
-def article(request, username):
+def user_article(request, username):
     user = models.User.objects.filter(username=username).first()
     articles = models.Article.objects.filter(author=user)
     print(articles)
-    return render(request, 'blog/articlemanage.html')
+    return render(request, 'blog/articlemanage.html', {'articles': articles, 'user': user})
+
+
+def article_detail(request, aid):
+    article = models.Article.objects.filter(id=aid).first()
+    if not article:
+        return render404(request)
+    return render(request, 'blog/article.html', {'article': article})
